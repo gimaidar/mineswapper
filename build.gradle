@@ -65,3 +65,7 @@ sourceSets.main.java.srcDir "$buildDir/generated-sources/src/main/java"
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+tasks.named("compileJava") {
+    dependsOn tasks.named("openApiGenerate")
+}
