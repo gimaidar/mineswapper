@@ -57,9 +57,4 @@ public class MinesweeperGame {
      */
     private boolean completed = false;
 
-    /**
-     * Количество открытых ячеек
-     */
-    private int openedCells;
-
 }

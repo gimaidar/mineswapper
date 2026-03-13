@@ -8,7 +8,6 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import ru.aidar.mineswapper.dao.MinesweeperGameDao;
 import ru.aidar.mineswapper.exception.BadRequestException;
 import ru.aidar.mineswapper.model.MinesweeperGame;
-import ru.aidar.mineswapper.service.mapper.MinesweeperMapper;
 import ru.aidar.mineswapper.service.mapper.MinesweeperMapperImpl;
 import ru.aidar.minesweeper.dto.GameInfoResponse;
 import ru.aidar.minesweeper.dto.GameTurnRequest;
@@ -30,8 +29,6 @@ class MinesweeperServiceImplTest {
 
     @Autowired
     private MinesweeperServiceImpl service;
-    @Autowired
-    private MinesweeperMapper mapper;
 
     @MockitoBean
     private MinesweeperGameDao minesweeperGameDao;

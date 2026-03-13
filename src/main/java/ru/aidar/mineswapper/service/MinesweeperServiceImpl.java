@@ -28,14 +28,7 @@ public class MinesweeperServiceImpl implements MinesweeperService {
         validateNewGameRequest(request);
         MinesweeperGame game = createGame(request);
         minesweeperGameDao.save(game);
-        String[][] matrix = game.getPlayerField();
-        for (int i = 0; i < matrix.length; i++) { // Проход по строкам
-            for (int j = 0; j < matrix[i].length; j++) { // Проход по столбцам
-                System.out.print("'" + matrix[i][j] + "'" + "\t");
-            }
-            System.out.println(); // Перенос строки после каждой строки матрицы
-        }
-        System.out.println("______________________________________________________________________________________");
+
         return minesweeperMapper.toGameInfoResponse(game);
     }
 
@@ -44,17 +37,7 @@ public class MinesweeperServiceImpl implements MinesweeperService {
         UUID gameId = request.getGameId();
         MinesweeperGame game = minesweeperGameDao.getById(gameId);
         validateGame(game, gameId);
-
         openCell(game, request.getRow(), request.getCol());
-
-//        String[][] matrix = game.getPlayerField();
-//        for (String[] strings : matrix) {
-//            for (String string : strings) {
-//                System.out.print("'" + string + "'" + "\t");
-//            }
-//            System.out.println();
-//        }
-//        System.out.println("______________________________________________________________________________________");
         return minesweeperMapper.toGameInfoResponse(game);
     }
 
@@ -85,14 +68,11 @@ public class MinesweeperServiceImpl implements MinesweeperService {
     private void openCell(MinesweeperGame game, int row, int col) {
         if (!game.getPlayerField()[row][col].equals(" "))
             throw new BadRequestException("Ячейка уже открыта");
-
         if (game.getMines()[row][col]) {
-            explode(game, row, col);
+            explode(game);
             return;
         }
-
         floodFill(game, row, col);
-
         checkWin(game);
     }
 
@@ -109,7 +89,6 @@ public class MinesweeperServiceImpl implements MinesweeperService {
         int mines = countMines(game, row, col);
 
         game.getPlayerField()[row][col] = String.valueOf(mines);
-        game.setOpenedCells(game.getOpenedCells() + 1);
 
         if (mines != 0)
             return;
@@ -120,18 +99,14 @@ public class MinesweeperServiceImpl implements MinesweeperService {
                     floodFill(game, row + dr, col + dc);
     }
 
-    private void explode(MinesweeperGame game, int row, int col) {
-
+    private void explode(MinesweeperGame game) {
         game.setCompleted(true);
-
         for (int r = 0; r < game.getHeight(); r++) {
             for (int c = 0; c < game.getWidth(); c++) {
-
                 if (game.getMines()[r][c])
                     game.getPlayerField()[r][c] = "X";
                 else
-                    game.getPlayerField()[r][c] =
-                            String.valueOf(countMines(game, r, c));
+                    game.getPlayerField()[r][c] = String.valueOf(countMines(game, r, c));
             }
         }
     }
