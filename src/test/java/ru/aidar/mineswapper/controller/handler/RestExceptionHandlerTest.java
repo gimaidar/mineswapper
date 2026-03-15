@@ -48,8 +48,7 @@ class RestExceptionHandlerTest {
     void handleMethodArgumentNotValidExceptionTest() {
         // Given
         BeanPropertyBindingResult bindingResult = new BeanPropertyBindingResult(new Object(), "request");
-        bindingResult.addError(new FieldError("request", "width", "must be <= 50")
-        );
+        bindingResult.addError(new FieldError("request", "width", "must be <= 50"));
         MethodArgumentNotValidException ex = new MethodArgumentNotValidException(null, bindingResult);
 
         // When
@@ -66,10 +65,8 @@ class RestExceptionHandlerTest {
     void handleConstraintViolationExceptionTest() {
         // Given
         ConstraintViolation<?> violation = mock(ConstraintViolation.class);
-
         when(violation.getMessage()).thenReturn("must be >= 2");
         when(violation.getPropertyPath()).thenReturn(createPathFromString("width"));
-
         ConstraintViolationException ex = new ConstraintViolationException(Set.of(violation));
 
         // When

@@ -89,7 +89,7 @@ class MinesweeperRestControllerTest {
                 .andExpect(jsonPath("$.height").value(5));
     }
 
-    @DisplayName("Should return error response status")
+    @DisplayName("Should return error response status when new post return error")
     @Test
     void newPostWithErrorTest() throws Exception {
         // Given
@@ -108,6 +108,7 @@ class MinesweeperRestControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    @DisplayName("Should return error response status when turn post return error")
     @Test
     void turnPostWithErrorTest() throws Exception {
         // Given

@@ -28,7 +28,6 @@ public class MinesweeperServiceImpl implements MinesweeperService {
         validateNewGameRequest(request);
         MinesweeperGame game = createGame(request);
         minesweeperGameDao.save(game);
-
         return minesweeperMapper.toGameInfoResponse(game);
     }
 
@@ -129,7 +128,6 @@ public class MinesweeperServiceImpl implements MinesweeperService {
         int opened = 0;
         for (int r = 0; r < game.getHeight(); r++) {
             for (int c = 0; c < game.getWidth(); c++) {
-
                 if (!game.getPlayerField()[r][c].equals(" "))
                     opened++;
             }
@@ -156,4 +154,5 @@ public class MinesweeperServiceImpl implements MinesweeperService {
             }
         }
     }
+
 }

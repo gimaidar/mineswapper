@@ -26,4 +26,5 @@ public class MinesweeperRestController implements MinesweeperApi {
     public ResponseEntity<GameInfoResponse> turnPost(GameTurnRequest gameTurnRequest) {
         return ResponseEntity.ok(minesweeperService.turnPost(gameTurnRequest));
     }
+
 }

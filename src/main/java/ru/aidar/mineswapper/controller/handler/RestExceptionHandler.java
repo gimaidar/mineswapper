@@ -41,7 +41,6 @@ public class RestExceptionHandler {
         return ResponseEntity.status(BAD_REQUEST).body(new ErrorResponse().error(message));
     }
 
-
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleCommonException(Exception ex) {
         log.error("Exception was thrown", ex);

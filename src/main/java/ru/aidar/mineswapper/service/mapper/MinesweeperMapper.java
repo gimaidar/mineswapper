@@ -46,4 +46,5 @@ public interface MinesweeperMapper {
             default -> throw new IllegalStateException("Неизвестный символ на поле: " + val);
         };
     }
+
 }

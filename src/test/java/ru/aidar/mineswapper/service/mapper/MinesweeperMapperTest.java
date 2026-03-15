@@ -19,7 +19,7 @@ class MinesweeperMapperTest {
     @Autowired
     private MinesweeperMapper mapper;
 
-    @DisplayName("Shoul map MinesweeperGame to GameInfoResponse")
+    @DisplayName("Should map MinesweeperGame to GameInfoResponse")
     @Test
     void toGameInfoResponseTest() {
         // Given
@@ -70,6 +70,7 @@ class MinesweeperMapperTest {
         assertThat(field.get(3).get(3)).isEqualTo(GameInfoResponse.FieldEnum.SPACE);
     }
 
+    @DisplayName("Should throw exception when field has invalid symbol")
     @Test
     void toGameInfoResponseWithExceptionTest() {
         // Given

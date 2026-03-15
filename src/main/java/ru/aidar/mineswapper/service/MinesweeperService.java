@@ -23,4 +23,5 @@ public interface MinesweeperService {
      * @return Ответ на запрос на выполнение хода в игре Сапер
      */
     GameInfoResponse turnPost(GameTurnRequest gameTurnRequest);
+
 }
